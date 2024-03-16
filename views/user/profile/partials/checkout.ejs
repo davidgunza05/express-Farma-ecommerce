@@ -1,0 +1,178 @@
+<%- include('../layouts/links')%>
+<body>
+<%- include('../layouts/header')%>  
+<div class="container pb-5 mb-5 p-b-140">
+  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+    <a href="/users/cart" class="stext-109 cl8 hov-cl1 trans-04">
+      Meu carrinho
+      <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </a>
+    <span class="stext-109 cl4">
+      Finalizar compra
+    </span>
+  </div>
+    <style>
+    .pb-1 {
+      padding-bottom: 0.25rem !important;
+  }
+  
+  .px-5 {
+      padding-right: 3rem !important;
+      padding-left: 3rem !important;
+  }
+  .justify-content-between {
+      justify-content: space-between !important;
+  }
+  .d-flex {
+      display: flex !important;
+  }
+  .mx-3 {
+      margin-right: 1rem !important;
+      margin-left: 1rem !important;
+  }
+  .flex-grow-1 {
+      flex-grow: 1 !important;
+  }
+  .mx-5 {  
+      margin-right: 3rem !important;
+      margin-left: 3rem !important;
+  }
+  .ft {
+    position: absolute;
+    margin-top: 0.25rem;
+}
+</style>
+<div class="row mt-5 pb-5 mb-5 p-b-140">
+  <div class="col-lg-8">
+    <div class="all-products rounded p-3" style="border: 1px solid #dbdbdb">
+      <h6 class="border-bottom pb-4">Produtos</h6>
+      <% if(products != null){ %>
+        <%products.forEach((product,i)=> {%>
+      <div class="product-details d-flex justify-content-between pb-1 px-5" style="border-bottom: 1px solid #dbdbdb" >
+        <span><%=i+1%>.</span>
+        <span class="flex-grow-1 mx-3"><%=product.name.name%></span>
+        <span><span style="text-transform: none;">x</span> <%=product.quantity%></span>
+        <span class="mx-5"><%=product.price%> AKZ</span>
+      </div>
+      <%})%>
+      <%}%>
+    </div>
+
+    <div class="mt-3 bg-light flex-w flex-sb-m bor15 p-t-18 p-b-15 pl-4 pr-4">
+      <% if(defaultAddress != 0){%>
+        <span style="text-transform: None;">
+          <strong>Provincia:</strong> <%=defaultAddress.provincia%><br>
+          <strong>Município:</strong> <%=defaultAddress.municipio%><br>
+          <strong>Bairro / Avenida / Bloco:</strong> <%=defaultAddress.bairro%><br>
+          <strong>Edifício:</strong> <%=defaultAddress.predio%><br>
+          <strong>Contacto:</strong> <%=defaultAddress.contacto%><br>
+          <strong>Casa / Apart. Nº:</strong> <%=defaultAddress.pincode%><br> 
+        
+        <div class="d-flex justify-content-between mt-2"> 
+            <!-- Button trigger modal -->
+        <button type="button" class="btn p-2 mt-4 bor14 btn-dark text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Alterar endereço de entrega
+        </button>
+        </div>
+<form action="/users/cart/checkout" method="post">
+        <input type="text" name="addressID" value="<%=defaultAddress._id%>" hidden>
+        <%}else{%>
+          <h6 class="text-danger mt-3" style="text-transform: none;">Você não adicionou nenhum endereço</h6>
+          <a class="my-2 btn  bor14 btn-dark text-white" href="/users/addresses" style="font-size: 0.7rem; letter-spacing: 2px;">
+            Adicionar Endreço
+          </a>
+      <%}%>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="order-summary rounded p-3 d-flex flex-column" style="border: 1px solid #dbdbdb; font-size: 0.9rem;" >
+        <div class="mb-2">
+          <input type="text" class="form-control" id="couponCode" placeholder="Código de desconto" name = "couponCode" onkeyup="checkCoupon()"/>
+        </div>
+        <span id="couponMessage" class="bg-light px-2 rounded m-2">
+        </span>
+    </div>
+    <div class="addresses rounded p-4 my-3" style="border: 1px solid #dbdbdb">
+      <h6 class="border-bottom pb-2">Forma de Pagamento<h6>
+      <div class="form-check d-flex align-items-center" style="font-size: 0.85rem;">
+        <input class="ft" type="radio" name="paymentMethod" value="Pagamento na entrega"  checked id="flexRadioDefault1">
+        <label class="form-check-label mx-2" for="flexRadioDefault2"><b>
+          Pagar na entrega
+        </label>
+      </div> 
+    </div>
+
+    <div class="order-summary rounded p-3 my-3 d-flex flex-column" style="border: 1px solid #dbdbdb; font-size: 0.9rem;">
+      <div class="d-flex justify-content-between fw-bold p-1">
+        <span>Preço:</span>
+        <div>
+          <span><%= userCart.totalPrice%></span> AKZ
+        </div>
+      </div>
+      <div class="d-flex justify-content-between border-bottom p-1">
+        <span>Preço com desconto:</span>
+        <div>
+          <span id="couponDiscount">0</span> AKZ
+        </div>
+      </div>
+      <input type="number" name="couponDiscount" value="" id="inputCouponDiscount" hidden>
+      <div class="d-flex justify-content-between fw-bold p-1">
+        <span>Preço Final:</span>
+        <div>
+          <span id="finalPrice"><%= userCart.totalPrice%> </span> AKZ
+        </div>
+      </div>
+      <input type="number" name="finalPrice" value="<%= userCart.totalPrice%>" id="inputFinalPrice" hidden>
+    </div>
+    <div class="order-summary rounded p-3 my-3 d-flex flex-column" style="border: 1px solid #dbdbdb; font-size: 0.9rem;">
+      <button type="submit" onclick="return confirm('Proceder pagamento?')" class="text-white btn btn-dark btn-sm" <% if(defaultAddress == 0){%>style="background-color: grey;" disabled<%}%>>Proceder pagamento</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Change default Address</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%if(allAddresses!=null){%>
+          <form action="/users/cart/checkout/changeDefaultAddress" method="post">
+          <% allAddresses.forEach((address,i) => { %>
+            <div class="form-check d-flex align-items-center rounded mb-2" style="border: 1px solid #dbdbdb;">
+              <input class="form-check-input mx-2" type="radio" name="DefaultAddress" id="radio<%=i+1%>" value="<%=address._id%>">
+              <label class="form-check-label m-2" for="radio<%=i+1%>" >
+                 <span style="text-transform: None;">
+                  <%=address.building%></br><%=address.address%> - <%=address.pincode%></br><%=address.country%></br></span>
+                  <span style="font-size: 0.85rem;text-transform: None;">
+                    Alternate No: <%=address.contactNumber%>
+                  </span>
+              </label>
+            </div>
+            <%})%>    
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <a href="/users/addresses" class="btn btn-sm btn-dark text-white" style="font-size: 0.85rem;text-transform: none; letter-spacing: 0px;">Add new address</a>
+        <div>
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-dark text-white" >Set as default</button>
+        </div>
+      </form>
+      <%}%>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<%- include('../layouts/footer')%>
+<script src="/js/user/checkout.js"></script>
+<script src="/online/jquery-3.5.1.js"></script>
+
+</body>
+</html> 
+

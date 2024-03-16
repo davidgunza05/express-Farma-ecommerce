@@ -1,0 +1,98 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <%- include('../layouts/navbar') %>
+        <div class="container-xxl flex-grow-1 container-p-y"> 
+        <%- include('../layouts/msg') %> 
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                      <h4 class="card-title pb-2">Venda por Mês</h4>
+                      <table class="table table table-bordered" id="dataTable">
+                        <thead>
+                          <tr style="background: #e3e3e3;">
+                            <th>Mês</th>
+                            <th>Produtos vendidos</th>
+                            <th>Total de pedidos</th>
+                            <th>Receita</th>
+                            <th>Gasto médio por pedido</th>
+                          </tr>
+                        </thead>
+
+                        <% orderData.forEach(function(data) { %>
+                        <tbody id="tableBody" style="font-size: 0.85rem;">
+                            <tr>
+                              <td><%= data._id.month %>/<%= data._id.year %></td>
+                              <td><%= data.totalProducts %></td>
+                              <td><%= data.totalOrders %></td>
+                              <td><%= data.revenue %> AKZ</td>
+                              <td><%= data.avgBillPerOrder %></td>
+                            </tr>
+                          </tbody>
+                          <% }); %>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 grid-margin pt-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                      <h4 class="card-title pb-2">Venda por Dia</h4>
+                      <table class="table table table-bordered" id="dataTable">
+                        <thead>
+                          <tr style="background: #e3e3e3;">
+                            <th>Data</th>
+                            <th>Produtos vendidos</th>
+                            <th>Total de pedidos</th>
+                            <th>Receita</th>
+                            <th>Gasto médio por pedido</th>
+                          </tr>
+                        </thead>
+
+                        <tbody id="tableBody" style="font-size: 0.85rem;">
+                          <% dailyOrderData.forEach(function(data) { %>
+                            <tr>
+                              <td><%= data._id.day %>/<%= data._id.month %>/<%= data._id.year %></td>
+                              <td><%= data.totalProducts %></td>
+                              <td><%= data.totalOrders %></td>
+                              <td><%= data.revenue %> AKZ</td>
+                              <td><%= data.avgBillPerOrder %> AKZ</td>
+                            </tr>
+                            <% }); %> 
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              </div>
+            </div>
+
+            </div>
+          </div> 
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div>
+        
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  
+    

@@ -1,0 +1,148 @@
+<%- include('../layouts/links') %>
+<body>
+  <%- include('../layouts/header') %> 
+  <% if(currentUser!=null){%>
+    <div class="container pb-5 pt-4">
+      <%- include('../layouts/msg') %>
+
+        <div class="main-body">
+            <nav aria-label="breadcrumb" class="main-breadcrumb mt-5"></nav>
+            <div class="row gutters-sm">
+              <div class="col-md-4 mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                      <a href="" data-toggle="modal" data-target="#exampleModal">
+                        <img src="/img/users/<%=currentUser.photo%>" alt="Admin" class="rounded-circle" width="150">
+                      </a>
+                      <div class="mt-3">
+                        <h4><%=currentUser.name%></h4>
+                        <p class="text-secondary mb-1"><%=currentUser.username%></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mt-3">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                      <h6 class="mb-0">
+                        <a href="/users/orders">Ver histórico de compra</a>
+                      </h6>
+                    </li> 
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Nome</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary"> 
+                        <%=currentUser.name%><a href="" class="text-secondary" data-toggle="modal" data-target="#exampleModal"> <i class="bi bi-pencil"></i></a>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <%=currentUser.email%>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Telefone</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <%=currentUser.number%>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Senha</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <a href="/users/changePassword">Alterar senha</a>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Endereço</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                      <% if(defaultAddress!=""){ %>
+                        <p style="text-transform: none;">
+                          <%=defaultAddress[0].addresses.provincia%>, 
+                          <%=defaultAddress[0].addresses.municipio%></br>
+                          <%=defaultAddress[0].addresses.bairro%> - Casa / Apart nº <%=defaultAddress[0].addresses.pincode%></br>
+                          <%=defaultAddress[0].addresses.predio%><br>
+                          Contacto para entrega: <%=defaultAddress[0].addresses.contacto%>
+                        </br></p>
+                      <a href="/users/addresses"><button class="mt-3 btn-sm btn-primary">Ver endereços</button></a>
+                      <%}else{%>
+                        <a href="/users/addresses"><button class="mt-3 btn-sm btn-primary">Adicionar novo endereço</button></a>
+                      <%}%>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+   
+              </div>
+            </div>
+        </div>
+    </div>
+  <%}%>  
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Update your details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cl    ose"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="form-holder"
+                placeholder="name"
+                name = "name"
+                value="<%=currentUser.name%>"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="form-holder" style="font-size: 0.75rem">Upload your image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="form-holder"
+                  placeholder="photo"
+                  name = "photo"
+                  />
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-dark">Save Changes</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../layouts/script') %>  
+  <script src="/online/bootstrap.bundle.min.js"></script>
+  <script src="/online/jquery-3.5.1.js"></script>
+  <script src="/online/sweetalert2@11.js"></script>
+
+</body>
+</html>

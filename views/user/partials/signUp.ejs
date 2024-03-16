@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <title>Criar Conta</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link rel="stylesheet" href="/assets/css/login.css">
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center"> 
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="img" style="background-image: url(/assets/images/slide-03.jpg);">
+			      </div>
+						<div class="login-wrap p-4 p-md-5">
+			      	<div class="d-flex">
+			      		<div class="w-100">
+			      			<h3 class="mb-4">Registrar-se</h3>
+			      		</div>
+			      	</div>
+					  <%- include('../layouts/msg') %>
+					  <%if(locals.errorMessager) {%>
+						<p class="alert-danger alert"><%= locals.errorMessager %></p>
+					  <%}%>
+
+				<form action="/users/signUp" method="post">
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control" name="name" placeholder="Teu nome" required maxlength="30" minlength="6">
+                </div>
+
+				<div class="form-group mb-3">
+					<input type="text" class="form-control" name="username" placeholder="Nome de usuário" required maxlength="20" minlength="6"/>
+				</div>
+
+                <div class="form-group mb-3">
+                  <input type="number" class="form-control" name="number" placeholder="Contacto" required maxlength="5" minlength="2"/>
+                </div>
+        
+                <div class="form-group mb-3">
+                  <input type="email" class="form-control" name="email" placeholder="Teu email" required maxlength="50" minlength="20"/>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="password" class="form-control" name="password" placeholder="Tua Senha" required  minlength="8"/>
+                </div>
+				<div class="form-group mb-3">
+					<input type="password" class="form-control" name="confirmar_senha" placeholder="Confirmar Senha" required  minlength="8"/>
+				  </div>
+                <input type="submit" id="submitButton" class="btn btn-success w-100" value="Criar Conta"/>
+		            <div class="form-group text-center mt-3 d-md-flex">
+		            	<div class=" w-100 mt-2">
+                     Já tem uma conta? <a class="text-primary" href="/users/signIn">Fazer Login</a>
+                  </div>  
+		            </div>                
+              </form>
+		          <p class="text-center"><a href="/"><button class="text-primary btn">Ir a página principal</button></a></p>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</body>
+</html> 
+<script src="/js/signUp.js"></script>

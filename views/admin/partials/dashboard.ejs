@@ -1,0 +1,276 @@
+<%- include('../layouts/styles') %>
+<body>
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <%- include('../layouts/sidebar') %>
+      <div class="layout-page">
+        <%- include('../layouts/nav') %>
+        <div class="content-wrapper"> 
+          <div class="container-xxl flex-grow-1 container-p-y">
+          
+            <%if(allProducts != null) {%>
+              <%allProducts.forEach((produto) =>{%>
+                <div class="d-block"> 
+                <%if(produto.stock == 0){%>   
+                  <div class="bs-toast toast fade show toast-placement-ex m-2 bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header pb-4">
+                      <i class="bx bx-bell me-2"></i>
+                      <div class="me-auto fw-semibold">Stock esgotado de <%=produto.name%></div>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    </div>      
+                <%}%>              
+              <%})%>
+              <%}%>
+              
+          <div class="row">
+            <div class="col-lg-7 mb-4 order-0">
+              <div class="card">
+                <div class="d-flex align-items-end row">
+                  <div class="col-sm-6">
+                    <div class="card-body">
+                      <h5 class="card-title text-primary">Administrador</h5>
+                      <p class="mb-4">
+                        Veja todas suas vendas de hoje 
+                      </p>
+
+                      <a href="/admin/total" class="btn btn-sm btn-outline-primary">Vendas de hoje</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6  text-center text-sm-left">
+                    <div class="card-body pb-0 px-0 px-md-4">
+                      <img
+                        src="/admin/img/illustrations/man-with-laptop-light.png"
+                        height="140"
+                        alt="View Badge User"
+                        data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                        data-app-light-img="illustrations/man-with-laptop-light.png"
+                      />
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div>
+                             
+            <div class="col-5 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                      <div class="card-title pt-2">
+                        <h5 class="text-nowrap mb-2">Venda deste mês</h5>
+                        <span class="badge bg-label-warning rounded-pill">Ano 2023</span>
+                      </div>
+                      <div class="mt-sm-auto pb-2">
+                        <small class="text-success text-nowrap fw-semibold"> 
+                        <h3 class="mb-0"><%=locals.vendaDesteMes%> AKZ</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+
+          <div class="row">
+            <div class="col-3 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="/admin/img/icons/unicons/chart-success.png" alt="chart success" class="rounded">
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                        <a class="dropdown-item" href="/admin/orders">Ver</a>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1 text-dark">Vendas</span>
+                  <h3 class="card-title mb-2"><%=locals.orderCount%></h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="/admin/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded">
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                        <a class="dropdown-item" href="/admin/product_management">Ver</a>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1 text-dark">Produtos</span>
+                  <h3 class="card-title text-nowrap mb-1"><%=locals.productCount%></h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="/admin/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                        <a class="dropdown-item" href="/admin/total">Ver</a>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1 text-dark">Receita</span>
+                  <h3 class="card-title text-nowrap mb-2"><%=locals.totalRevenue%> Kz</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="/admin/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                        <a class="dropdown-item" href="/admin/customer_management">Ver</a>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="fw-semibold fw-semibold d-block mb-1 text-dark">Clientes</span>
+                  <h3 class="card-title mb-2"><%=locals.customerCount%></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row pb-2" id="charts">
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="clearfix">
+                      <h4 class="card-title float-left">Análise de vendas - <%let currentYear = new Date();%>
+                        <%currentYear = currentYear.getFullYear();%><%=currentYear%></h4>
+                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                    </div>
+                    <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="clearfix">
+                      <h4 class="card-title float-left">Receita</h4>
+                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                    </div>
+                    <canvas id="myChart2"></canvas>
+                  </div>
+                </div>
+              </div> 
+      
+              <div class="col-md-5 grid-margin stretch-card mt-4 mb-5">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Status de Pedidos</h4>
+                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+                  </div>
+                  <canvas class="canva-3"id="myChart3"></canvas>
+                </div>
+              </div>  
+          </div>
+
+          <%if(recentOrders){%> 
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Venda /</span> Histórico de vendas</h4>
+            <div class="card">
+              <h5 class="card-header">Histórico de vendas</h5>
+              <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr style="background: #e3e3e3;">
+                        <th>ID do pedido</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Pagamento</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%recentOrders.forEach((order)=>{%>
+                      <tr>
+                        <td><%=order._id.toString('hex').slice(0, 10)%></td>
+                        <td><%=order.customer.email%></td>
+                        <td>
+                          <%if(order.status === 'Cancelled'){%>
+                            0 Kz
+                            <%}else{%>
+                              <%= order.finalPrice %> Kz
+                          <%}%>
+                        </td>
+                        <td class="text-center" style="width: 20%">
+                          <div> 
+                            <%if(order.status === 'Processando'){%>
+                              <% if (order.delivered != true) {%>
+                                <span class="badge btn-warning">Processando</span>
+                                <%}else{%>
+                                <span><i class="fa fa-check text-success"></i><span class="badge btn-success">Concluído</span> <%} %> <br />
+                                <% if (order.delivered == true) {%>
+                                  <span><%=moment(order.deliveredOn).format('LLL')%></span>
+                                  <%}%>
+                                </span>
+                                <%} else {%>
+                                  <%if(order.status){%>
+                                    <span class="badge btn-danger">Cancelado</span>
+                                  <%}%>
+                                <%}%>
+                            </div>
+                        </td>
+                        <td><%= order.modeOfPayment %></td>
+                      </tr> 
+                      <%})%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class=" text-center my-3">
+              <a class="btn btn-sm btn-dark text-white" href="/admin/salesReport">Baixar lista de vendas</a>
+            </div>   
+          <%}%>
+          </div> 
+          
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+          
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div> 
+
+
+ 
+  <%- include('../layouts/script') %>
+
+  <script src="/js/admin/dashboard.js"></script> 
+</body>
+</html> 

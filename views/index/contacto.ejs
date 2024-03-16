@@ -1,0 +1,72 @@
+<%- include('partials/links')%>
+<body class="animsition">
+<%- include('partials/header')%>
+
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url(assets/images/slide-01.jpg);">
+    <h2 class="pt-2 mt-3 ltext-105 cl0 txt-center">
+        Contacto
+    </h2>
+</section>	
+
+<% if(currentUser!=null){%>
+<!-- Content page -->
+<section class="bg0 p-t-104 p-b-116">
+    <div class="container">
+        <div class="flex-w flex-tr">
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                <%- include('partials/msg')%>
+                <form action="/contacto" method="post">
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Envia-nos uma mensagem 
+                    </h4>
+                    <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30 d-none" type="text" value="<%=currentUser.name%>" name="name">
+                    <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30 d-none" type="text" value="<%=currentUser.email%>" name="email"> 
+
+                    <div class="bor8 m-b-30">
+                        <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="Insira a mensagem..." required></textarea>
+                    </div>  
+
+
+                    <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                        Enviar
+                    </button>
+                </form>
+            </div>
+
+            <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md"> 
+                <div class="flex-w w-full p-b-42">
+
+                    <div class="size-212 p-t-2">
+                        <span class="mtext-110 cl2">
+                            TELEFONE
+                        </span>
+
+                        <p class="stext-115 cl1 size-213 p-t-18">
+                            +244 935 302 656
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex-w w-full">
+
+                    <div class="size-212 p-t-2">
+                        <span class="mtext-110 cl2">
+                            SUPORTE DE VENDA
+                        </span>
+
+                        <p class="stext-115 cl1 size-213 p-t-18">
+                            express-farma@gmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>	
+<%}%>
+
+ 
+
+<%- include('partials/footer')%>
+</body>
+</html>	

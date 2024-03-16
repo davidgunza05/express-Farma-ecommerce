@@ -1,0 +1,140 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <%- include('../layouts/navbar') %>
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <div class="page-header">
+            <h3 class="page-title"> 
+              <button type="button" class="btn btn-dark text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Adicionar Postagem
+              </button>
+            </h3> 
+          </div>  
+        <%- include('../layouts/msg') %>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title pb-2">Todas postagens do blog</h4>
+                  <div class="table-responsive">
+
+                <% if(allBlogs !=null) { %>                   
+                      <table class="table table table-bordered" id="dataTable">
+                        <thead>
+                          <tr style="background: #e3e3e3;">
+                          <th>Título</th>
+                          <th>Imagem</th>
+                          <th>Categoria</th>
+                          <th>Cometários</th>
+                          <th>Data</th>
+                          <th></th>
+                          </tr>
+                        </thead>
+
+                    <% if(allBlogs !=null){ %>                    
+                    <tbody>
+                    <% allBlogs.forEach(function(item,i){ %>
+                      <tr>
+                        <td><%= item.titulo %></td>
+                        <td><img src="/img/blogs/<%= item.imageblog %>" width="100"></td>
+                        <td><%= item.category.name %></td>
+                        <td>                                        
+                          <%if(item.reviews.length == 0 || item.reviews.length == 1){%>
+                          <%=item.reviews.length%> Comentário
+                          <%}else{%>
+                          <%=item.reviews.length%> Comentários
+                          <%}%>
+                        </td>
+                        <td><%= moment(item.data).format('L') %></td> 
+                        <td>
+
+                        <div class="d-flex text-center">                         
+                            <div class="dropdown">
+                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/admin/blog_management/edit?id=<%= item._id %>"  onclick="return confirm('Editar <%= item.titulo %> ?')" ><i class="bx bx-edit-alt me-1"></i> Editar</a>
+                                <a class="dropdown-item" href="/admin/blog_management/<%= item._id%>"><i class="bx bx-eyes me-1"></i>Ver</a>
+                                <a class="dropdown-item" href="/admin/blog_management/delete_blog?id=<%= item._id%>" onclick="return confirm('Pretende eliminar <%= item.titulo %> ?')"><i class="bx bx-trash me-1"></i> Deletar</a>
+                              </div>
+                            </div>
+                        </div>                            
+                        </td>
+                      </tr>   
+                    <% }) %>
+                    </tbody>
+                    <%}%>   
+                    </table>
+                    <%}%>   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background: #fff;">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Adicionar Postagem
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> 
+          <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="exampleInputUsername1">Titulo</label>
+              <input type="text" class="form-control" id="form-holder" name="titulo" required placeholder="Nome do produto">
+            </div>
+            <div class="form-group">
+              <label for="imageblog">Imagem do blog</label>
+              <input type="file" class="form-control" id="imageblog" name="imageblog" required>
+            </div> 
+            <div class="form-group">
+              <select id="inputState" class="form-control" name="category"> 
+                <option selected class="text-dark">Escolha a categoria</option> 
+                <%categories.forEach((data)=>{%> 
+                  <option value="<%=data._id%>"><%=data.name%></option> 
+                <%})%> 
+              </select>
+            </div>     
+            <div class="form-group">
+              <label for="">Descrição 1</label>
+              <textarea class="form-control" id="conteudo1" name="conteudo1" cols="30" rows="10" required placeholder="Conteúdo do blog"></textarea>
+            </div>     
+            <div class="form-group">
+              <label for="">Descrição 2</label>
+              <textarea class="form-control" id="conteudo2" name="conteudo2" cols="30" rows="10" required placeholder="Conteúdo do blog"></textarea>
+            </div>      
+            <div class="justify-content-center text-center">
+              <button type="submit" class="btn btn-gradient-primary me-2">Criar postagem</button>
+              <button type="button" data-bs-dismiss="modal" class="btn btn-light">Cancelar</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    </div>
+  </div>  
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  

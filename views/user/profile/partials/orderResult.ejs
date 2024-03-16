@@ -1,0 +1,57 @@
+<%- include('../layouts/links')%>
+<body>
+<%- include('../layouts/header')%>
+
+<div class="container pt-3">
+  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+    <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+    Home
+      <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </a>   
+    <span class="stext-109 cl4">
+    Checkout
+    <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </span>
+    <span class="stext-109 cl4">
+      Resultado de pedido
+    </span>
+  </div>
+</div>
+
+<section class="bg0 p-t-40 p-b-85" id="cart">
+  <div class="container mx-auto  mt-2">
+    <div class="text-center mt-4 d-flex flex-column justify-content-center">
+      <h4 class="text-success">Seu pedido foi feito com sucesso</h4>
+      <span class="mb-3 fw-light mt-1"> <b>ID do pedido</b>: <%=orderID.toString('hex').slice(0, 10)%></span>
+      <div class="text-center">
+        <span class="navbar-brand text-center text-success" style="font-size: 7rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="100" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </svg>
+          <h2 class="mb-5" style="margin-top:-2rem; font-size:40px;"> Obrigado!</h2>
+        </span> 
+      </div>
+    </div>
+    
+    <!--
+    <img src="<%= qrCode %>" alt="Código QR do pedido" />
+    <div class="qr-code">
+      s<%= qrCode %>
+    </div>
+-->
+
+    <div class="text-center mb-4 fw-bold">
+      <a href="/users/orders/<%=orderID%>" class="text-white btn btn-success btn-sm text-white py-2 px-3 mx-2" >Ver Detalhes do pedido</a>
+      <a href="/products" class="text-white btn btn-dark btn-sm text-white py-2 px-3">Continuar comprando <i class="fa fa-arrow-right"></i></a>
+    </div>
+    <div class="text-center mb-5 mt-1">
+      <span style="text-transform: none" >Para qualquer dúvida, entre em contato connosco em
+        <u style="text-transform: none">efarmai.nfo@gmail.com</u></span>
+    </div>
+  </div> 
+</section> 
+   
+<script src="/js/user/cart.js"></script>
+<%- include('../layouts/footer')%>
+</body>
+</html> 

@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="/admin/css/message.css">
+
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+  <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+    <i class="bx bx-menu bx-sm"></i>
+  </a>
+</div>
+
+<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+  <div class="navbar-nav align-items-center">
+    <div class="nav-item d-flex align-items-center">
+      <i class="bx bx-search fs-4 lh-0"></i>
+      <input type="text" class="form-control border-0 shadow-none" placeholder="Pesquisar..." aria-label="Pesquisar...">
+    </div>
+  </div>
+
+  <ul class="navbar-nav flex-row align-items-center ms-auto">
+    <%if(details != null){%>
+    <li class="nav-item navbar-dropdown dropdown-user dropdown">
+      <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+          <i class="bx bx-message w-px-40 h-auto rounded-circle"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu dropdown-menu-right navbar-dropdown preview-list"> 
+        <div class="" aria-labelledby="messageDropdown">
+          <h6 class="p-3 mb-0">Emails Recebidos</h6>
+          <div class="dropdown-divider"></div>
+          <% details.forEach(function(item,i){ %>
+          <a class="dropdown-item preview-item" href="/admin/mail_managements/<%= item._id %>">
+            <div class="preview-thumbnail">
+              <img src="/img/users/default_userPhoto.jpg" alt="image" class="profile-pic">
+            </div>
+            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+              <p class="preview-subject ellipsis mb-1 font-weight-normal"><strong><%= item.name %></strong> enviou uma mensagem</p>
+              <p class="text-gray mb-0"><%= moment(item.date).format('LLL') %></p>
+            </div>
+          </a>
+          <% }) %> 
+          <div class="dropdown-divider"></div>
+          <h6 class="p-3 mb-0 text-center"><a href="/admin/mail_management"><%=locals.contEmail%> email recebidos</a></h6>
+        </div>  
+      </ul>
+    </li>
+    <%}%> 
+     
+    <!-- User -->
+    <li class="nav-item navbar-dropdown dropdown-user dropdown">
+      <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+        <div class="avatar avatar-online">
+          <img src="/img/users/default_userPhoto.jpg" alt class="w-px-40 h-auto rounded-circle" />
+        </div>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <a class="dropdown-item" href="#">
+            <div class="d-flex">
+              <div class="flex-shrink-0 me-3">
+                <div class="avatar avatar-online">
+                  <img src="/img/users/default_userPhoto.jpg" alt class="w-px-40 h-auto rounded-circle" />
+                </div>
+              </div>
+              <div class="flex-grow-1">
+                <span class="fw-semibold d-block">Farmácia Gunza</span>
+                <small class="text-muted">Admin</small>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <div class="dropdown-divider"></div>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/">
+            <i class="bx bx-user me-2"></i>
+            <span class="align-middle">Ir a página inicial</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">
+            <i class="bx bx-cog me-2"></i>
+            <span class="align-middle">Definições</span>
+          </a>
+        </li>
+        <li>
+          <div class="dropdown-divider"></div>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/sair">
+            <i class="bx bx-power-off me-2"></i>
+            <span class="align-middle">Sair</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!--/ User -->
+  </ul>
+</div>
+</nav>

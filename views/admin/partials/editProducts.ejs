@@ -1,0 +1,105 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y"> 
+        <%- include('../layouts/msg') %>
+
+        <div class="modal-dialog"> 
+          <div class="modal-content" style="background: #fff;">
+            
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Editar Produto
+              </h1> 
+            </div>
+            <div class="modal-body"> 
+                <!-- -------------------- --> 
+                    <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+                      <div class="form-group pb-3">
+                        <label for="exampleInputUsername1">Nome</label>
+                        <input type="text" class="form-control" id="form-holder" value="<%= product.name %>" name="name" required placeholder="Nome do produto">
+                      </div>
+                      <div class="form-group pb-3">
+                        <label for="thumbnail">Imagem Principal</label><br>
+                        <input type="image" class="form-control"  value="<%=product.thumbnail%>" id="thumbnail" name="thumbnail" required>
+                      </div>
+                      <div class="form-group pb-3">
+                        <label for="frontImage">Imagem frontal</label><br>
+                        <input type="image" class="form-control" value="<%=product.frontImage%>" id="frontImage" name="frontImage" required>
+                      </div>
+                      <div class="form-group pb-3">
+                        <label for="images">Escolha 3 imagens para o slide</label><br> 
+                        <input type="image" class="form-control" id="images" name="images" multiple value="<%product.images.forEach((image)=>{%><%=image%><%})%>">
+                      </div>
+                      <div class="form-group pb-3">
+                        <select id="inputState" class="form-control" name="category"> 
+                          <option value="<%=product.category._id%>" class="fw-bold" selected><%=product.category.name%></option> 
+                          <%categories.forEach((data)=>{%> 
+                            <option value="<%=data._id%>"><%=data.name%></option> 
+                          <%})%> 
+                        </select>
+                      </div>         
+                      <div class="form-group pb-3">
+                        <label for="">Dosagem</label>
+                        <input type="text" class="form-control" id="dosagem"  value="<%= product.dosagem %>" name="dosagem" required placeholder="dosagem do produto"/>
+                      </div> 
+                      <div class="form-group pb-3">
+                        <label for="">Preço</label>
+                        <input type="number" class="form-control" id="price" value="<%= product.price%>" name="price"required placeholder="Preço do produto"/>
+                      </div>
+                      <div class="form-group pb-3">
+                        <label for="">Stock</label>
+                        <input type="number" class="form-control" id="stock" value="<%= product.stock%>" name="stock"required placeholder="Quantidade existente"/>
+                      </div>
+                      <div class="form-group pb-3">
+                        <label for="">Data de expiração</label>
+                    <input type="date" class="form-control" id="expiryDate" value="<%= product.expiryDate%>" name="expiryDate" required placeholder="Data de expiração"/>
+                      </div> 
+                      <div class="form-group pb-3">
+                        <label for="">Fabricante</label>
+                        <input type="text" class="form-control" id="fabricante" value="<%= product.fabricante%>" name="fabricante" required placeholder="Faricante / Distribuidora"/>
+                      </div>             
+                      <div class="form-group pb-3">
+                        <label for="">Efeitos colaterais</label>
+                        <textarea class="form-control text-justify" id="efeitos_colaterais" name="efeitos_colaterais" cols="30" rows="5" required placeholder="Efeitos que podem ser causado pelo produto"><%= product.efeitos_colaterais%></textarea>
+                      </div> 
+                      <div class="form-group pb-3">
+                        <label for="">Quantidade</label>
+                        <input type="text" class="form-control" id="composicao" value="<%= product.composicao %>" name="composicao" required placeholder="Ex.: 400mg / 500mg"/>
+                      </div>   
+                      <div class="form-group pb-3">
+                        <label for="">Descrição</label>
+                        <textarea class="form-control text-justify" id="descricao" name="descricao" cols="30" rows="10" required placeholder="Sobre o produto ou contraindicação"><%= product.descricao%></textarea>
+                      </div>      
+                      <div class="justify-content-center pt-3 text-center">
+                        <button type="submit" class="btn btn-dark me-2">Salvar</button>
+                        <a href="/admin/product_management" onclick="return confirm('Cancelar edição do produto ?')"><button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cancelar</button></a>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+                  
+            </div> 
+        </div>
+      </div>
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div> 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  

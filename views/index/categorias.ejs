@@ -1,0 +1,80 @@
+<%- include('partials/links')%>
+<body class="animsition">
+<%- include('partials/header')%>
+
+<div class="container pt-3">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+      <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+        Home
+        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+      </a>  
+      
+      <span class="stext-109 cl4">
+        <%=listingName%>
+      </span>
+    </div>
+</div>
+
+<div class="bg0 m-t-23 p-b-140">
+    <div class="container">
+        <%if(listing.length > 0){%>  
+
+        <div class="container text-center justify-center item-center pb-5 mb-2 pt-3">
+          <h3>Categoria: <b><%=listingName%></b></h3>
+        </div>
+        <div class="row isotope-grid" > 
+            <%listing.forEach(product => {%>
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+                    <!-- Block2 -->
+                    <div class="block2">
+                      <div class="block2-pic hov-img0 <%if(product.stock == 0){%>label1" data-label="Esgotado<%}%>">
+                        <img src="/img/products/<%=product.thumbnail%>" alt="IMG-PRODUCT" class="img-responsive">
+            
+                        <a href="/products/<%=product._id%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                          Visualizar
+                        </a>
+                      </div>
+                      <style>                     
+                      </style>
+            
+                      <div class="block2-txt flex-w flex-t p-t-14">
+                        <div class="block2-txt-child1 flex-col-l ">
+                          <a href="/products/<%=product._id%>" class="stext-105 cl3 hov-cl1 trans-04 js-name-b2">
+                            <%=product.name%>
+                          </a>
+                          <span class="stext-107 cl4">
+                            Avaliações (<%=product.reviews.length%>)
+                          </span> 
+                        </div> 
+                      </div>
+                      <div class="block2-txt d-flex flex-t padding-product">
+                        <div class="block2-txt-child1 flex-col-l ">
+                          <span class="stext-kz cl3">
+                            <%=product.price%> AKZ
+                          </span>
+            
+                        </div>
+                        <div class="block2-txt-child2 flex-r" style="width: 100%;"> 
+                          <span class="dis-block pos-relative">
+                            <%=product.composicao%>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+            <%})%> 
+        </div> 
+        <%} else {%>
+          <div class="container text-center justify-center item-center pb-5 pt-3">
+            <h3>Categoria: <b><%=listingName%></b></h3>
+          </div>
+            <div class="flex-c-m flex-w w-full p-t-38">
+                <h1 class="text-danger">Nenhum produto postado com essa categoria</h1>
+            </div>
+        <%}%> 
+    </div>
+</div>
+<script src="/js/productListing.js"></script>
+<%- include('partials/footer')%>
+</body>
+</html>

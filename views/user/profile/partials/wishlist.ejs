@@ -1,0 +1,72 @@
+<%- include('../layouts/links')%>
+<body class="animsition">
+<%- include('../layouts/header')%>  
+<div class="container">
+  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+    <a href="/products" class="stext-109 cl8 hov-cl1 trans-04">
+      Produtos
+      <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </a>
+    <span class="stext-109 cl4">
+      Meu carrinho
+    </span>
+  </div>
+</div>
+
+	<!-- Shoping Cart -->
+	<section class="bg0 p-t-75 p-b-85">
+		<div class="container">
+      <% if(userWishlist!= null && userWishlist.products.length !=0){%> 
+			<div class="row">
+				<div class="col-lg-10 m-lr-auto m-b-50">
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart" id="wishlist">
+								<tr class="table_head">
+									<th class="column-1">Imagem</th>
+									<th class="column-2">Nome</th>
+									<th class="column-3">Preço</th>
+									<th class="column-4">Fabricante</th>
+									<th class="column-3"></th>
+								</tr>
+                <%userWishlist.products.forEach((product) => {%>
+								<tr class="table_row" >
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="/img/products/<%=product.thumbnail%>" alt="imagem da lista">
+										</div>
+									</td>
+									<td class="column-2"><%=product.name%></td>
+									<td class="column-3"><%=product.price%> AKZ</td>
+									<td class="column-4"><%=product.fabricante%></td> 
+									<td class="column-4 pr-5">
+                    <button onclick="addToCartFromWishlist('<%=product._id%>')" class="btn btn-success text-white mx-2 button-div js-addcart-detail">
+                      <span class="zmdi zmdi-shopping-cart-add"></span>
+                    </button>
+                    <button class="btn text-white button-div btn-danger" onclick="removeFromWishlist('<%=product._id%>')">
+                      <span class="fa fa-trash"></span>
+                    </button>
+                  </td>
+								</tr> 
+                <%})%>
+
+							</table>
+						</div> 
+					</div>
+				</div> 
+			</div>
+      <%} else {%>
+        <div class="pb-5 pt-5 justify-content-center text-center m-4">
+          <h2 class="text-danger">Não há nenhum produto adicionado a tua lista de desejos</h2>
+      </div>
+      <%}%>
+		</div>
+	</section>
+
+
+<%- include('../layouts/footer')%>
+<script src="/js/user/wishlist.js"></script>
+<script src="/online/sweetalert2@11.js"></script>
+
+</body>
+</html> 

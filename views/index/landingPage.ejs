@@ -1,0 +1,142 @@
+<%- include('./partials/links')%>
+<body class="animsition">
+
+<%- include('./partials/header')%> 
+<%- include('./partials/hero')%>     
+
+<% if(newReleases != null){%>
+<section class="bg0 p-b-80 pt-5 mt-2">
+  <div class="container">
+    <div class="pb-5 ">
+      <h3 class="ltext-103 cl5">
+        Produtos Recentes
+      </h3>
+    </div>
+ 
+    <div class="row isotope-grid pt-4"> 
+      <% newReleases.forEach((product,i)=>{%>
+      <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+        <!-- Block2 -->
+        <div class="block2">
+          <div class="block2-pic hov-img0 <%if(product.stock == 0){%>label1" data-label="Esgotado<%}%>">
+            <img src="/img/products/<%=product.thumbnail%>" alt="IMG-PRODUCT" class="img-responsive">
+
+            <a href="/products/<%=product._id%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+              Visualizar
+            </a>
+          </div>
+          <style>                     
+          </style>
+
+          <div class="block2-txt flex-w flex-t p-t-14">
+            <div class="block2-txt-child1 flex-col-l ">
+              <a href="/products/<%=product._id%>" class="stext-105 cl3 hov-cl1 trans-04 js-name-b2">
+                <%=product.name%>
+              </a>
+              <span class="stext-107 cl4">
+                Avaliações (<%=product.reviews.length%>)
+              </span> 
+            </div> 
+          </div>
+          <div class="block2-txt d-flex flex-t padding-product">
+            <div class="block2-txt-child1 flex-col-l ">
+              <span class="stext-kz cl3">
+                <%=product.price%> AKZ
+              </span>
+
+            </div>
+            <div class="block2-txt-child2 flex-r" style="width: 100%;"> 
+              <span class="dis-block pos-relative">
+                <%=product.composicao%>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <%})%>
+    </div>
+
+    <!-- Load more -->
+    <div class="flex-c-m flex-w w-full p-t-45">
+      <a href="/products" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+        Ver todos produtos
+      </a>
+    </div>
+  </div>
+</section>
+<%}%>   
+
+<% if(produtos != null){%>
+<section class="sec-product bg0">
+  <div class="container">
+    <div class="p-b-32">
+      <h3 class="ltext-105 cl5 txt-center respon1">
+        Produtos Populares
+      </h3>
+    </div>
+
+    <!-- Tab01 -->
+    <div class="tab01"> 
+      <!-- Tab panes -->
+      <div class="tab-content p-t-50">
+        <!-- - -->
+        <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
+          <!-- Slide2 -->
+          <div class="wrap-slick2">
+            <div class="slick2">
+              <% produtos.forEach((product,i)=>{%>
+              <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                <!-- Block2 -->
+                <div class="block2">
+                  <div class="block2-pic hov-img0 <%if(product.stock == 0){%>label1" data-label="Esgotado<%}%>">
+                    <img src="/img/products/<%=product.thumbnail%>" alt="IMG-PRODUCT" class="img-responsive">
+        
+                    <a href="/products/<%=product._id%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                      Visualizar
+                    </a>
+                  </div>
+                  <style>                     
+                  </style>
+        
+                  <div class="block2-txt flex-w flex-t p-t-14">
+                    <div class="block2-txt-child1 flex-col-l ">
+                      <a href="/products/<%=product._id%>" class="stext-105 cl3 hov-cl1 trans-04 js-name-b2">
+                        <%=product.name%>
+                      </a>
+                      <span class="stext-107 cl4">
+                        <%=product.fabricante%>
+                      </span> 
+                    </div> 
+                  </div>
+                  <div class="block2-txt d-flex flex-t padding-product">
+                    <div class="block2-txt-child1 flex-col-l ">
+                      <span class="stext-kz cl3">
+                        <%=product.price%> AKZ
+                      </span>
+        
+                    </div>
+                    <div class="block2-txt-child2 flex-r" style="width: 100%;"> 
+                      <span class="dis-block pos-relative">
+                        <%=product.composicao%>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+              <%})%>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</section>
+<%}%>
+
+<%if(banners != null){%>
+  <%- include('./partials/banner')%> 
+<%}%>
+
+<%- include('./partials/footer')%>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+  	<title>Entrar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/style.login.css">
+	<style>
+		.h3{
+		margin-top: 0;
+		margin-bottom: 1rem;
+		font-weight: 500;
+		line-height: 1.1;
+		color: #566a7f;
+		font-family: "Public Sans", sans-serif;
+		}
+	</style>
+	</head>
+	<body background="red"> 
+	<section class="ftco-section">
+		<div class="container"> 
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="wrap">
+						<div class="img" style="background-image: url(/assets/images/slide-03.jpg);"></div>
+						<div class="login-wrap p-4 p-md-5">
+			      		
+						<div class="d-flex">
+			      		<div class="w-100">
+			      			<h3 class="mb-2 h3">Express-Farma</h3>
+			      		</div>
+			      		</div>
+					<%- include('../layouts/msg') %>
+				  	<% if(locals.errorMessage) {%><p class="alert alert-danger text-danger"><%= locals.errorMessage %></p> <%}%>
+	
+					<form action="/users/signIn" method="post" class="signin-form">
+			      	<div class="form-group mt-4">
+			      		<input type="text" class="form-control" name="username" required>
+			      		<label class="form-control-placeholder" for="username">Nome de usuário</label>
+			      	</div>
+		            <div class="form-group mt-4">
+		              <input type="password" class="form-control" name="password" required>
+		              <label class="form-control-placeholder" for="password">Senha</label>
+		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+		            </div>
+		            <div class="form-group">
+		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Entrar</button>
+		            </div>
+		            <div class="form-group d-md-flex">
+		            	<div class="w-50 text-left">
+			            	<label class="checkbox-primary mb-0"><a href="/users/signUp">Criar conta</a>
+						</div>
+						<div class="w-50 text-md-right">
+							<a href="/users/forgotPassword">Esqueci a senha</a>
+						</div>
+		            </div>
+		          </form>
+		          <p class="text-center"><a data-toggle="tab" href="/">Ir a página principal</a></p>
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section> 
+  <script src="/js/signUp.js"></script> 
+</body>
+</html> 

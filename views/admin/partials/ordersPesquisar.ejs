@@ -1,0 +1,132 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+
+        <%- include('../layouts/msg') %>
+
+        <style>
+          .search-btn{
+            background: none;
+            border: none;
+          }
+        </style>
+
+        <a href="/admin/orders" class="btnt btn-sm btn-primary">Voltar a todos pedidos</a>
+
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col">
+                  <form action="/admin/order/pesquisar" method="get">
+                    <div class="input-group input-group-merge speech-to-text">
+                        <input type="text" name="q" class="form-control" placeholder="Pesquisar compra" required/>
+                        <span class="input-group-text">
+                          <button type="submit" class="search-btn"><i class="bx bx-search cursor-pointer text-to-speech-toggle"></i></button>
+                        </span>
+                      </div>
+                  </form>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+
+          <div class="row"> 
+            <div class="col-12 grid-margin">
+                <div class="container text-center justify-center order-center pb-2 pt-2">
+                    <h3>Você pesquisou por: <b><%= q %></b></h3>
+                </div>
+                <% if (orders.length > 0) { %>                 
+              <div class="card">
+                <div class="card-body"> 
+                  <div class="table-responsive">
+
+                      <table class="table table table-bordered" id="dataTable">
+                        <thead>
+                        <tr style="background: #e3e3e3;">
+                          <th>ID do pedidos</th>
+                          <th>Cliente</th>
+                          <th style="width: 20%">Valor</th> 
+                          <th style="width: 20%">Status</th>
+                          <th>Data do pedido</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="tableBody" style="font-size: 0.85rem;">
+                          
+                        <% orders.forEach(function(order,i){ %>
+                        <tr>
+                          <td>
+                            <%=order._id.toString('hex').slice(0, 10)%><br />
+                            <a href="/admin/orders/<%= order._id %>" class="btn btn-sm btn-dark text-white m-1">Ver detalhes</a>
+                            <a href="/admin/orders/delete_order?id=<%= order._id%>" onclick="return confirm('Pretende eliminar <%= order.name %> ?')" class="btn btn-danger text-white btn-sm "><i class="bx bxs-trash" title="Eliminar"></i></a>
+
+                          </td>
+                          <td><%= order.customer.name %><br /><%= order.customer.email %></td>
+                          <td style="width: 20%">
+                            <b>Conta:</b> <%= order.finalPrice %> Kz<br/>
+                            <b>Preço com desconto:</b><%=order.discountPrice %> Kz<br/>
+                            <b>Preço:</b> <%= order.price %> Kz
+                          </td>
+                          <td class="text-center" style="width: 20%">
+                            <div id="deliver<%=i%>">
+                              <%if(order.status === 'Processando'){%>
+                                <% if (order.delivered != true) {%>
+                                  <button class="btn btn-sm btn-dark w-100" onclick="return confirm('Pretende concluir a entrega ?'), deliverOrder('<%=order._id%>','<%=i%>')" ->
+                                    <span>Entregar <i class="fa fa-truck text-warning"></i></span>
+                                  </button>
+                                  <%}else{%>
+                                  <span>
+                                  <span class="badge btn-success"><i class="fa fa-check text-success"></i> Concluído</span> <%} %> <br />
+                                  <% if (order.delivered == true) {%>
+                                    <span><%=moment(order.deliveredOn).format('LLL')%></span>
+                                    <%}%>
+                                  </span
+                                  >
+                                <%} else {%>
+                                  <%if(order.status){%>
+                                    <span class="badge btn-danger">Cancelado</span>
+                                  <%}else{%>
+                                    <%=order.status%>
+                                  <%}%>
+                                <%}%>
+                              </div>
+                          </td>
+                          <td><%= moment(order.orderedOn).format('LLL') %> <br /></td>
+                        </tr>
+                          <%})%>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+            <% }else { %> 
+                <div class="container text-center justify-center order-center pb-3 pt-5">
+                    <h3 class="text-danger">Pedido não encontrado</h3>
+                </div>
+            <%}%>
+            </div>
+          </div> 
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div> 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script>  
+<%- include('../layouts/script') %>
+</body>
+</html>  

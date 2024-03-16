@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Produtos Mais Vendidos</title>
+</head>
+<body>
+  <h1>Produtos Mais Vendidos</h1>
+  <% for (let i = 0; i < results.length; i++) { %>
+    <h2>Mês <%= results[i]._id %></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Lucro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let j = 0; j < results[i].topProducts.length; j++) { %>
+          <tr>
+            <td><%= results[i].topProducts[j].product.name %></td>
+            <td><%= results[i].topProducts[j].quantity %></td>
+            <td><%= results[i].topProducts[j].profit %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>

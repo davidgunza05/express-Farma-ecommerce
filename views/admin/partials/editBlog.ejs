@@ -1,0 +1,75 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y"> 
+        <%- include('../layouts/msg') %>
+
+        <div class="modal-dialog"> 
+          <div class="modal-content" style="background: #fff;">
+            
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Editar Postagem de blog
+              </h1> 
+            </div>
+            <div class="modal-body"> 
+              <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+                <div class="form-group pb-3">
+                <label for="exampleInputUsername1">Titulo</label>
+                <input type="text" class="form-control" id="form-holder" value="<%=blog.titulo%>" name="titulo" required placeholder="Nome do produto">
+                </div>
+                <div class="form-group pb-3">
+                <label for="imageblog">Imagem do blog</label>
+                <input type="image" class="form-control" id="imageblog" value="<%=blog.imageblog%>" name="imageblog" required>
+                </div> 
+                <div class="form-group pb-3">
+                <select id="inputState" class="form-control" name="category"> 
+                  <option value="<%=blog.category._id%>" class="fw-bold" selected><%=blog.category.name%></option> 
+                  <%categories.forEach((data)=>{%> 
+                    <option value="<%=data._id%>"><%=data.name%></option> 
+                  <%})%> 
+                </select>
+                </div>     
+                <div class="form-group pb-3">
+                <label for="">Descrição 1</label>
+                <textarea class="form-control" id="conteudo1" name="conteudo1" cols="30" rows="10" required placeholder="Conteúdo do blog"><%=blog.conteudo1%></textarea>
+                </div>     
+                <div class="form-group pb-3">
+                <label for="">Descrição 2</label>
+                <textarea class="form-control" id="conteudo2" name="conteudo2" cols="30" rows="10" required placeholder="Conteúdo do blog"><%=blog.conteudo2%></textarea>
+                </div>      
+
+                <div class="modal-footer text-center">
+                  <button type="submit" class="btn btn-dark">Salvar</button>
+                  <a href="/admin/blog_management" onclick="return confirm('Cancelar edição do post ?')">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  </a>
+                </div> 
+            </form> 
+              </div>
+              </div>
+                  
+            </div> 
+        </div>
+      </div>
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div> 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  

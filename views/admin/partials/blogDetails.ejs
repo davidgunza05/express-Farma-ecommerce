@@ -1,0 +1,121 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <div class="page-header">
+            <h3 class="page-title"> 
+                <a href="/admin/blog_management" class="btn btn-sm btn-dark">Voltar</a>
+            </h3> 
+        <%- include('../layouts/msg') %>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row"> 
+                    <% if(currenBlog !=null) { %> 
+                      <div class="col-md-12 grid-margin stretch-card">
+                          <style>
+                            .fw-100  {
+                                font-weight: 100;
+                            }
+                          </style>
+                        <div class="card-body">
+                          <div class="list-wrapper">
+
+
+                            <div class="p-b-63">
+                                <a href="#" class="hov-img0 how-pos5-parent">
+                                    <img src="/img/blogs/<%= currenBlog.imageblog %>" alt="IMG-BLOG" width="400px">
+                                </a>
+        
+                                <div class="p-t-32 pt-3">
+                                    <h4 class="p-b-15">
+                                        <a href="#" class="ltext-108 cl2 hov-cl1 trans-04">
+                                            <%= currenBlog.titulo %>
+                                        </a>
+                                    </h4>
+        
+                                    <div class="flex-w flex-sb-m p-t-18">
+                                        <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
+                                            <span>
+                                                <span class="cl4">Por</span> Admin  
+                                                <span class="cl12 m-l-4 m-r-6">|</span>
+                                            </span>
+        
+                                            <span>
+                                                <%=moment(currenBlog.data).format('LL')%>
+                                                <span class="cl12 m-l-4 m-r-6">|</span>
+                                            </span>
+        
+                                            <span>
+                                                <%= currenBlog.category.name%>
+                                            </span>
+        
+                                            <span>
+                                                <%if(currenBlog.reviews.length == 0 || currenBlog.reviews.length == 1){%>
+                                                    <%=currenBlog.reviews.length%> Comentário
+                                                <%}else{%>
+                                                    <%=currenBlog.reviews.length%> Comentários
+                                                <%}%>
+                                            </span>
+                                        </span> 
+                                    </div>
+
+                                    <p class="stext-117 cl6 pt-4">
+                                        <%= currenBlog.conteudo1%>
+                                    </p>
+
+                                    <% if (currenBlog.reviews.length) { %> 
+                                        <div class="mt-5">
+                                            <% currenBlog.reviews.forEach(review => { %>
+                                                <div class="comentario">
+                                                    <p class="user mb-2"><%= review.user %></p> 
+                                                    <p class="comment"><%= review.comment %></p> 
+                                                </div>
+                                              <% }); %>
+                                        </div>
+                                    <% } else {%>
+                                        <% if(locals.session == null){%>  
+                                            <p class="stext-107 cl6 text-danger">
+                                                Não existe comentários nesta postagem
+                                            </p>
+                                        <%}%>
+                                        <% if(locals.session == null){%>  
+                                            <p class="stext-107 cl6 p-b-40">
+                                                Entre com a sua conta para poder comentar esta postagem
+                                            </p>
+                                        <%}%>
+                                    <% }%>
+                                </div>
+                            </div> 
+                          </div>
+                        </div>
+                        </div>
+                  <% } %>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div> 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  

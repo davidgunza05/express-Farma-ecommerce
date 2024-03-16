@@ -1,0 +1,64 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <%- include('../layouts/navbar') %>
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <div class="page-header">
+            <h3 class="page-title"> 
+                <a href="/admin/mail_management" class="btn btn-sm btn-dark">Voltar</a>
+            </h3> 
+        <%- include('../layouts/msg') %>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row"> 
+                    <% if(currentMail !=null) { %> 
+                      <div class="col-md-12 grid-margin stretch-card">
+                          <style>
+                            .fw-100  {
+                                font-weight: 100;
+                            }
+                          </style>
+                        <div class="card-body">
+                          <div class="list-wrapper">
+                              <div class="d-block">
+                                  <h4><%=currentMail.name%></h4>
+                                  <h6 class="fw-none"><%=currentMail.email%></h6>
+                                  <h6 class="fw-100"><%=moment(currentMail.date).format('LLL')%></h6>
+                              </div>
+                            <p>
+                              <%= currentMail.msg %>
+                            </p>
+                            <a href="https://mail.google.com/mail/" class="btn btn-sm btn-dark mt-3">Responder por email</a>
+                          </div>
+                        </div>
+                        </div>
+                  <% } %>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div> 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  

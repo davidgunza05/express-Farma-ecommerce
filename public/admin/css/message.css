@@ -1,0 +1,142 @@
+.ms-0, .rtl .preview-list .preview-item .preview-thumbnail .preview-icon i, .rtl .list-wrapper .remove, .rtl .navbar .navbar-menu-wrapper .search-field {
+margin-left: 0 !important; }
+
+
+.badge-success, .preview-list .preview-item .preview-thumbnail .badge.badge-online {
+    border: 1px solid #1bcfb4;
+    background: #1bcfb4;
+    color: #ffffff; }
+  
+  .badge-info, .preview-list .preview-item .preview-thumbnail .badge.badge-offline {
+    border: 1px solid #198ae3;
+    background: #198ae3;
+    color: #ffffff; }
+  
+  .badge-warning, .preview-list .preview-item .preview-thumbnail .badge.badge-busy {
+    border: 1px solid #fed713;
+    background: #fed713;
+    color: #ffffff; }
+
+/* Preview */
+.preview-list .preview-item {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-ms-flex-direction: row;
+flex-direction: row;
+-webkit-box-align: start;
+-ms-flex-align: start;
+align-items: flex-start;
+padding: .75rem 1.5rem;
+font-size: .875rem; }
+.preview-list .preview-item:last-child {
+border-bottom: 0; }
+.preview-list .preview-item:hover {
+background: #e9ecef; }
+.preview-list .preview-item .form-check {
+margin-top: 8px;
+margin-right: 1rem; }
+.preview-list .preview-item .preview-thumbnail {
+color: color(white);
+position: relative; }
+.preview-list .preview-item .preview-thumbnail img,
+.preview-list .preview-item .preview-thumbnail .preview-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 100%; }
+.preview-list .preview-item .preview-thumbnail .preview-icon {
+  padding: 6px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  .preview-list .preview-item .preview-thumbnail .preview-icon i {
+    font-size: 1.125rem;
+    margin: 0; }
+.preview-list .preview-item .preview-thumbnail .badge {
+  border: 2px solid color(white);
+  border-radius: 100%;
+  bottom: 5px;
+  display: block;
+  height: 14px;
+  left: -5px;
+  padding: 0;
+  position: absolute;
+  width: 14px; }
+.preview-list .preview-item .preview-item-content {
+line-height: 1;
+padding-left: 15px; }
+.preview-list .preview-item .preview-item-content:first-child {
+  padding-left: 0; }
+.preview-list .preview-item .preview-item-content p {
+  margin-bottom: 10px; }
+  .preview-list .preview-item .preview-item-content p .content-category {
+    font-family: 'source-sans-pro-semibold', sans-serif;
+    padding-right: 15px;
+    border-right: 1px solid #ebedf2; }
+.rtl .preview-list .preview-item .preview-item-content {
+  padding-left: 0;
+  padding-right: 1rem;
+  margin-right: 0;
+  margin-left: auto; }
+.preview-list .preview-item .preview-actions {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-ms-flex-direction: row;
+flex-direction: row; }
+.preview-list .preview-item .preview-actions i {
+  width: 29px;
+  color: color(gray-lightest);
+  height: 29px;
+  border: 2px solid color(gray-lightest);
+  border-radius: 100%;
+  padding: 3px 6px;
+  display: inline-block; }
+  .preview-list .preview-item .preview-actions i:first-child {
+    margin-right: 10px; }
+
+.preview-list.comment-preview .preview-item {
+padding: .87rem 0; }
+.preview-list.comment-preview .preview-item:first-child {
+padding-top: 0; }
+.preview-list.comment-preview .preview-item p {
+line-height: 27px; }
+
+.preview-list.bordered .preview-item {
+border-bottom: 1px solid #ebedf2; }
+.preview-list.bordered .preview-item:last-child {
+border-bottom: 0; }
+
+
+.align-items-start {
+-webkit-box-align: start !important;
+-ms-flex-align: start !important;
+align-items: flex-start !important; }
+
+
+.justify-content-center {
+-webkit-box-pack: center !important;
+-ms-flex-pack: center !important;
+justify-content: center !important; }
+
+.flex-column {
+-webkit-box-orient: vertical !important;
+-webkit-box-direction: normal !important;
+-ms-flex-direction: column !important;
+flex-direction: column !important; }
+
+.ellipsis {
+max-width: 200px;
+overflow: hidden;
+text-overflow: ellipsis; }

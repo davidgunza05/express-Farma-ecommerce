@@ -1,0 +1,123 @@
+<%- include('../layouts/styles') %>
+<body>  
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <%- include('../layouts/sidebar') %>
+    <div class="layout-page"> 
+      <div class="content-wrapper">
+        <!-- Content -->
+        <%- include('../layouts/navbar') %>
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <div class="page-header">
+            <h3 class="page-title"> 
+              <button type="button" class="btn btn-dark text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Adicionar Banner
+              </button>
+            </h3> 
+          </div>  
+        <%- include('../layouts/msg') %>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title pb-2">Todos banners</h4>
+                  <div class="table-responsive">
+
+                <% if(allBanners !=null) { %>                   
+                      <table class="table table table-bordered" id="dataTable">
+                        <thead>
+                          <tr style="background: #e3e3e3;">
+                            <th>Title</th>
+                            <th>Ação</th>
+                            <th>Descrição</th>
+                            <th>Imagem</th>
+                            <th>URL</th>
+                            <th>Video</th>
+                          </tr>
+                        </thead>
+
+                        <tbody id="tableBody" style="font-size: 0.85rem;">
+                          
+                      <% allBanners.forEach(function(item,i){ %>
+                        <tr>
+                          <td><%= item.title %></td>
+                          <td class="text-center">
+                            <div id="Action<%=item._id%>" class="d-flex flex-column">
+                              <button class="btn btn-sm btn-dark w-100" onclick="changeActivity('<%=item._id%>','<%=item.active%>')">
+                              <% if (item.active == true) {%>
+                              <i class="py-1 fa fa-lock-open fa-lg text-success" aria-hidden="true"></i><span>Ativo</span>
+                              <%}else{%>
+                              <i class="py-1 fa fa-lock fa-lg " aria-hidden="true"></i><span class="text-danger">Inativo</span> <%} %>
+                            </button>
+                            <button class="btn btn-sm btn-danger my-1" onclick="deleteBanner('<%=item._id%>')">
+                              <i class="py-1 bx bxs-trash" aria-hidden="true" ></i>
+                            </button>
+                            </div>
+                          </td>
+                          <td><%= item.description %></td>
+                          <td><%if(item.image){%><%= item.image %><%}else{%>Nenhum<%}%></td>
+                          <td><%if(item.url){%><%= item.url %><%}else{%>Nenhum<%}%></td>
+                          <td><%if(item.videoURL){%><a href="<%= item.videoURL %>" target="_blank"><b class="text-primary">Link do Vídeo</b></a><%}else{%>Nenhum jytreiuyt<%}%></td>
+                          
+                        </tr>
+                        <% }) %>
+                        </tbody>
+                      </table>
+                    <%}%>   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        
+        </div> 
+        
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background: #fff;">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Adicionar Banner
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> 
+                <form action="" method="post" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="form-holder" placeholder="Título" name="title" required/>
+                  </div>
+                  <div class="mb-3">
+                    <input  type="file" class="form-control" id="form-holder" name="bannerImage"/>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="form-holder" placeholder="Descrição" name="description"/>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="form-holder" placeholder="URL" name="url"/>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="form-holder" placeholder="URL do vídeo" name="videoURL"/>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Criar Banner</button>
+                  </div>
+                </form>
+        </div>
+    </div>
+    </div>
+  </div>  
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div> 
+<script src="/js/admin/admin.js"></script> 
+<%- include('../layouts/script') %>
+</body>
+</html>  

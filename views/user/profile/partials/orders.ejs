@@ -1,0 +1,82 @@
+<%- include('../layouts/links') %>
+<body>
+  <%- include('../layouts/header') %> 
+  <div class="container pt-3">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+      <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+        Home
+        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+      </a>  
+      <a href="/users/profile" class="stext-109 cl8 hov-cl1 trans-04">
+        Perfil
+        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+      </a>        
+      <span class="stext-109 cl4">
+        Meus histórico de compras
+      </span>
+    </div>
+  </div>
+ <style>
+  .table-pro {
+    border: 1px solid #d3d3d3;
+  }
+  .table td, .table th {
+    border: 1px solid #d3d3d3;
+  }
+ </style>
+      
+<section>
+  <div class="p-5 p-b-65">
+    <% if(allOrders!= null && allOrders.length !=0){%> 
+      <h3 class="text-center my-4 fw-light  text-success">Histórico de compras.</h3>
+      <div class="text-center my-4 fw-bold">
+      </div>         
+    <table class="table table-responsive"  >
+      <thead>
+        <tr style="background: #d3d3d3;">
+          <th scope="col">Nº</th>
+          <th scope="col">ID da compra</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Forma de pagamento</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Endereço de entrega</th>
+          <th scope="col">Data</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%allOrders.forEach((order,i) => {%>
+        <tr>
+          <th scope="row"><%=i+1%></th>
+          <td><%=order._id._id.toString('hex').slice(0, 10)%></td>
+          <td><% if(order.delivered==true){%><span class="text-success">Entregue</span><%}else{%><span class="text-danger">Não entregue</span><%}%></td>
+          <td><%=order.totalQuantity%></td>
+          <td><%=order.modeOfPayment%></td>
+          <td><%=order.finalPrice%> Kz</td>
+          <td><%=order.shippingAddress.bairro%> - <%=order.shippingAddress.pincode%>
+          <td><%=moment(order.orderedOn).format('LL')%></td>
+          <td><a href="/users/orders/<%=order._id%>" class="btn btn-secondary text-white mt-1" style="font-size: 0.8rem" >Ver detalhe</a></td>
+          <script>
+            const moment = require('moment');
+            moment.locale('pt-br');
+          </script>
+        </tr>
+        
+        <%})%>
+
+      </tbody>
+    </table>   
+    <%}else{%>
+      <h3 class="text-center my-4 fw-light text-danger">Você não fez nenhuma compra.</h3>
+      <div class="text-center my-4 fw-bold">
+        <a href="/products" class=" fst-italic btn btn-dark">Comprar produto <i class="fa fa-arrow-right"></i></a>
+      </div>    
+    <%}%>    
+</div>
+</section>
+
+<%- include('../layouts/footer') %>
+
+</body>
+</html>
