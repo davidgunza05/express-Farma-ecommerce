@@ -3,7 +3,6 @@
 Um aplicativo web de ecommerce farmacêutico completo feito usando NodeJS, MongoDB, HTML, Bootstrap e o mecanismo de visualização EJS.
 O front-end é completamente projetado usando HTML, CSS, Bootsrap 5 e JavaScript com responsividade móvel.
 
-***https://timelesswatches.in***
 
 ## Funcionalidades - Desenvolvimento
 
